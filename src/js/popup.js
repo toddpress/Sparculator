@@ -32,12 +32,6 @@ function addTd(val) {
 	return val;
 }
 
-function resetVals() {
-	$('#start').val('');
-	$('#finish').val('');
-	$('#lunch').val('');
-}
-
 function updateTableRow(day) {
 	var days = localStorage,
 		d = JSON.parse(days[day]),
@@ -50,7 +44,6 @@ function refreshTotals() {
 	var totalHrs = 0.00;
 	$('tbody tr td:last-child').each(function(i, el){
 		var text = $(el).text() == '--' ? 0 : $(el).text();
-		console.log($(el));		
 		totalHrs += parseFloat(text);
 	});
 	$('tfoot td').text(totalHrs+'hrs');
