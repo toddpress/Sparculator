@@ -1,5 +1,5 @@
-function roundToQuarter(float) {
-	rounded = Math.round(float*4)/4;
+function roundToQuarter(fpn) {
+	rounded = Math.round(fpn*4)/4;
 	return rounded;
 }
 
@@ -10,7 +10,6 @@ function createTimesObject(inputs) {
 	fT = $(inputs[1]).timepicker('getTime');
 	lt = $(inputs[2]).val();
 
-	// Progel
 	var s = new Date(sT).toLocaleTimeString().toLowerCase().replace(':00 ', ''),
 		f = new Date(fT).toLocaleTimeString().toLowerCase().replace(':00 ', ''),
 		t = roundToQuarter(((fT - sT) / 3600000) - (lt/60)),
@@ -35,9 +34,9 @@ function addTd(val) {
 function updateTableRow(day) {
 	var days = localStorage,
 		d = JSON.parse(days[day]),
-		el = $('#'+day);
+		$row = $('#'+day);
 
-	el.empty().append(addTd(day) + addTd(d.start) + addTd(d.finish) + addTd(d.lunch + 'min(s)') + addTd(d.total)); 
+	$row.empty().append(addTd(day) + addTd(d.start) + addTd(d.finish) + addTd(d.lunch + 'min(s)') + addTd(d.total)); 
 }
 
 function refreshTotals() {
@@ -75,7 +74,7 @@ $(function(){
 	
 	$('input[type=text]').timepicker({forceRoundedTime:true, step:15, selectOnBlur:true, minTime:'6:00am'});
 	$('tbody tr[id='+today+']').addClass('active');
-	refreshTotals(),
+	refreshTotals();
 
 	$('table').on('click', 'tr[id]', function(e){
 		var tDay = $(this).attr('id'),
