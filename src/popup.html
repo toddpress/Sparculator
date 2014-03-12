@@ -1,0 +1,261 @@
+﻿<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+    <title>Sparculator</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/timepicker.css">
+	<style>
+		.clearfix:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		.t {
+			display: table;
+		}
+		.tr {
+			display: table-row;
+		}
+		.td {
+			display: table-cell;
+		}
+
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			color:black;
+			font-family: "Roboto", sans-serif;
+			margin:0;
+			overflow:hidden;
+			padding:10px 10px 20px;
+			background-repeat:repeat-x;
+			color:#4F545A;
+			min-width:640px;
+		}
+		
+		.topbar {
+			background: #93CB66;		
+			padding: 10px 15px;
+			margin-left: -15px;
+			margin-right: -15px;
+			margin-bottom: 15px;
+			color: white;
+		}
+		.heading {
+			font-weight: 300;
+			margin-bottom: 10px;
+		}
+		.topbar h1.heading {
+			display: inline-block;
+			font-size: 1.4em;
+			margin:0;
+		}
+
+		.topbar h1.heading > span {
+			vertical-align: middle;
+			display: inline-block;
+			background: url("img/icon_48.png") no-repeat center;
+			background-size: 35px 35px;
+			width: 35px;
+			height: 35px;
+			margin-right: 5px;
+		}
+
+		.topbar span.version {
+			display: inline-block;
+			float:right;
+			font-size:0.8em;
+			font-weight:300;
+			line-height:29px;
+		}
+
+		table {
+			position: relative;
+			min-width: 100%;
+			margin-bottom: 20px;
+			border-collapse:collapse;
+			border: none;
+			background-color: rgba(255, 219, 83, 1);
+		}
+
+		th, td {
+			box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
+				inset 0 1px rgba(0,0,0,0.25);
+		}
+		th {
+			font-weight: normal;
+			padding: 1em;
+			color: rgba(0,0,0,0.45);
+			text-shadow: 0 0 1px rgba(0,0,0,0.1);
+			font-size: 1em;
+		}
+		td {
+			color: rgba(0,0,0,0.45);
+			padding: 0.7em 1em 0.7em 1.15em;
+			text-shadow: 0 0 1px rgba(255,255,255,0.1);
+			font-size: 0.93em;
+			text-align: center;
+		}
+		tbody tr td:first-child {
+			color: rgba(0,0,0,0.65);
+		}
+
+		tbody tr {
+			-webkit-transition: background 0.3s, box-shadow 0.3s;
+		}
+		tbody tr.active {
+			background: rgba(0,0,0,0.19);	
+		}
+
+		tbody tr:not(.active):hover {
+			background: rgba(0,0,0,0.05);
+		}
+		input[type=text],
+		input[type=number] {
+			margin:0;
+			font-size: 1em;
+			padding-left: 0.3em;
+			background: rgba(0,0,0,0.05);
+			border: none;
+			width: 175px;
+			height: 35px;
+			line-height: 35px;
+			outline: none;
+		}
+		input[type=number],
+		button {
+			position: relative;
+			top:1px;
+		}
+		input[type=number]::-webkit-inner-spin-button,
+		input[type=number]::-webkit-outer-spin-button {
+		    -webkit-appearance: none;
+		    margin: 0;
+		}
+		input:valid,
+		input:in-range {
+			background:hsl(93,49.3%,80%);
+			border-color:hsl(93,49.3%,40%);
+		}
+
+		input:invalid:not(:empty),
+		input:out-of-range:not(:empty) {
+		    border-color:hsl(0, 50%, 50%);
+		    background:hsl(0, 50%, 90%);
+		}		
+		button {
+			margin:0;
+			width: 88px !important;
+			margin-left: -5px;
+			border: none;
+			outline: none;
+			background-color: #71B03C;
+			color: white;
+			height: 35px;
+			width: 75px;
+			line-height: 35px;
+			font-size: 1em;
+			font-weight: 500;
+			text-shadow: 0 0 3px rgba(0,0,0,0.1);
+		}
+		button:before {
+			content: "";
+			position: absolute;
+			height: 0;
+			width: 0;
+			border: 5px solid #71B03C;
+			border-left:5px solid transparent;
+			border-top: 5px solid transparent;
+			right:100%;
+			bottom:0;
+		}
+
+	</style>
+  </head>
+  <body>
+		<div class="topbar clearfix">
+			<h1 class="heading"><span></span>Sparculator</h1>
+			<span class="version">version: 0.0.1</span>
+		</div>
+		<div id="timeList">
+			<table>
+				<thead>
+					<th>Day</th>
+					<th>Start</th>
+					<th>End</th>
+					<th>Lunch</th>
+					<th>Total</th>
+				</thead>
+				<tbody id="timesTable">
+					<tr id="Sun">
+						<td>Sun</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+					<tr id="Mon">
+						<td>Mon</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+					<tr id="Tue">
+						<td>Tue</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+					<tr id="Wed">
+						<td>Wed</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+					<tr id="Thu">
+						<td>Thu</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+					<tr id="Fri">
+						<td>Fri</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>																											
+					<tr id="Sat">
+						<td>Sat</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+						<td>--</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5"></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<form>
+			<input type="text" id="start" value="" placeholder="Start Time" pattern="(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d(?:[ap]m)" required>
+			<input type="text" id="finish" value="" placeholder="End Time" pattern="(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d(?:[ap]m)"required>
+			<input type="number" min="0" max="5000" id="lunch" placeholder="Lunch Length">
+			<button type="submit" id="addTime">Add</button>			
+		</form>
+	<div id="console"></div>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/timepicker.js"></script>
+	<script src="js/popup.js"></script>
+  </body>
+</html>
+
